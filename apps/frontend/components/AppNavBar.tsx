@@ -1,5 +1,6 @@
 'use client';
 import React from 'react'
+import Link from 'next/link'
 import {
     SignInButton,
     SignUpButton,
@@ -20,7 +21,7 @@ const AppNavBar = () => {
         
         <div className="container mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
-            <div className="flex items-center gap-3">
+            <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
               <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 text-white shadow-lg ring-1 ring-white/20">
                 <Monitor className="w-5 h-5" />
               </div>
@@ -33,7 +34,7 @@ const AppNavBar = () => {
                   <span className="text-xs text-muted-foreground font-medium">Live</span>
                 </div>
               </div>
-            </div>
+            </Link>
             
             <div className="flex items-center gap-3">
               <ThemeToggle />
@@ -55,8 +56,10 @@ const AppNavBar = () => {
                 </SignedOut>
                 <SignedIn>
                   <div className="flex items-center gap-3">
-                    <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground backdrop-blur-sm bg-background/20 hover:bg-background/40 border border-border/30">
-                      Dashboard
+                    <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground backdrop-blur-sm bg-background/20 hover:bg-background/40 border border-border/30" asChild>
+                      <Link href="/dashboard">
+                        Dashboard
+                      </Link>
                     </Button>
                     <div className="ring-2 ring-blue-500/30 rounded-full backdrop-blur-sm">
                       <UserButton 
