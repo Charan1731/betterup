@@ -5,7 +5,6 @@ import { Monitor, Shield, Clock, BarChart3, ArrowRight, CheckCircle } from 'luci
 const page = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
-      {/* Hero Section */}
       <section className="container mx-auto px-4 py-20 text-center">
         <div className="max-w-4xl mx-auto space-y-8">
           <div className="space-y-4">
