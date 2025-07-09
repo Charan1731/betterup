@@ -76,3 +76,52 @@ export const getWebsiteStatus =  async (req: Request, res: Response) => {
         });
     }
 }
+
+export const getWebsites = async (req: Request, res: Response) => {
+
+    const userId = req.userId!;
+
+    const response = await  prismaClient.website.findMany({
+        where:{
+            userId: userId,
+            disabled: false
+        }
+    })
+
+    if(!response){
+        res.status(404).json({
+            message: "No websites found"
+        })
+        return;
+    }
+
+    res.status(200).json({
+        message: "Websites retrieved successfully",
+        data: response
+    })
+
+    return;
+}
+
+
+export const deleteWebsite = async (req: Request, res: Response) => {
+    const userId = req.userId!;
+
+    const websiteId = req.body.id;
+
+    await prismaClient.website.update({
+        where:{
+            id: websiteId,
+            userId: userId
+        },
+        data: {
+            disabled: true
+        }
+    })
+
+    res.status(200).json({
+        message: "Website deleted successfully"
+    })
+
+    return;
+}
