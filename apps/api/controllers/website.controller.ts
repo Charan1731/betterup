@@ -85,6 +85,8 @@ export const getWebsites = async (req: Request, res: Response) => {
         where:{
             userId: userId,
             disabled: false
+        },include:{
+            ticks: true
         }
     })
 
