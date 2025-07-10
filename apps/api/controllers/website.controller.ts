@@ -109,7 +109,7 @@ export const getWebsites = async (req: Request, res: Response) => {
 export const deleteWebsite = async (req: Request, res: Response) => {
     const userId = req.userId!;
 
-    const websiteId = req.body.id;
+    const websiteId = req.params.id;
 
     await prismaClient.website.update({
         where:{

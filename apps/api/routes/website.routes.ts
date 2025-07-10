@@ -9,6 +9,6 @@ websiteRouter.get('/website/status',authMiddleware, getWebsiteStatus)
 
 websiteRouter.get("/website",authMiddleware, getWebsites)
 
-websiteRouter.delete('/website',authMiddleware, deleteWebsite)
+websiteRouter.delete('/website/:id',authMiddleware, deleteWebsite)
 
 export default websiteRouter;
