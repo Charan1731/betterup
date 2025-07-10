@@ -27,7 +27,7 @@ export function useWebsites() {
         
         const response = await axios.get(apiUrl, {
             headers: {
-                Authorization: token,
+                Authorization: `Bearer ${token}`,
             },
         });
 
