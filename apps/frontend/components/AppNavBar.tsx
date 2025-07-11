@@ -44,7 +44,7 @@ const AppNavBar = () => {
               
               <div className="flex items-center gap-3">
                 <div>
-                  <h1 className="text-xl font-bold bg-gradient-to-r from-foreground via-blue-600 to-purple-600 bg-clip-text text-transparent group-hover/logo:from-blue-600 group-hover/logo:to-purple-600 transition-all duration-300">
+                  <h1 className="text-xl font-bold font-nunito bg-gradient-to-r from-foreground via-blue-600 to-purple-600 bg-clip-text text-transparent group-hover/logo:from-blue-600 group-hover/logo:to-purple-600 transition-all duration-300">
                     Uptime Monitor
                   </h1>
                   <div className="flex items-center gap-2 mt-0.5">
