@@ -86,7 +86,6 @@ const AppNavBar = () => {
                   >
                     <SignInButton mode="modal">
                       <span className="font-medium relative z-10">Sign In</span>
-                      <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-xl opacity-0 group-hover/signin:opacity-100 transition-opacity duration-300"></div>
                     </SignInButton>
                   </Button>
                   
@@ -96,10 +95,6 @@ const AppNavBar = () => {
                     asChild
                   >
                     <SignUpButton mode="modal">
-                      {/* Animated background */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -skew-x-12 -translate-x-full group-hover/signup:translate-x-full transition-transform duration-700"></div>
-                      
-                      <Zap className="w-4 h-4 mr-2 relative z-10" />
                       <span className="font-semibold relative z-10">Get Started</span>
                     </SignUpButton>
                   </Button>
