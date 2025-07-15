@@ -1,64 +1,76 @@
 import React from 'react'
 import { Button } from '@/components/ui/button'
-import { Monitor, Shield, Clock, BarChart3, ArrowRight, CheckCircle, Zap, Globe, Users, TrendingUp, Star, ChevronDown, Activity, Bell, Eye, Smartphone, Mail, Slack } from 'lucide-react'
+import { Monitor, Shield, Clock, BarChart3, ArrowRight, CheckCircle, Zap, Globe, Users, TrendingUp, Star, ChevronDown, Activity, Bell, Eye, Smartphone, Mail, Slack, AlertTriangle, Gauge, MapPin, MessageSquare } from 'lucide-react'
 import Link from 'next/link'
 
 const page = () => {
   return (
-    <div className="min-h-screen bg-background relative overflow-hidden">
-      {/* Enhanced Background Effects */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-background to-purple-500/5"></div>
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob"></div>
-      <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob animation-delay-2000"></div>
-      <div className="absolute bottom-0 left-1/3 w-96 h-96 bg-pink-500/10 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob animation-delay-4000"></div>
-
-      {/* Hero Section */}
+    <div className="min-h-screen bg-background relative overflow-hidden -mt-20">
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/[0.02] via-background to-purple-500/[0.02] dark:from-blue-500/[0.08] dark:to-purple-500/[0.08]"></div>
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-br from-blue-500/20 to-blue-600/10 dark:from-blue-400/30 dark:to-blue-500/20 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-40 dark:opacity-60 animate-blob"></div>
+      <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-gradient-to-br from-purple-500/20 to-purple-600/10 dark:from-purple-400/30 dark:to-purple-500/20 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-40 dark:opacity-60 animate-blob animation-delay-2000"></div>
+      <div className="absolute bottom-0 left-1/3 w-96 h-96 bg-gradient-to-br from-pink-500/20 to-pink-600/10 dark:from-pink-400/30 dark:to-pink-500/20 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-40 dark:opacity-60 animate-blob animation-delay-4000"></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-transparent via-blue-500/[0.01] to-transparent dark:via-blue-400/[0.03] animate-pulse-slow"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-purple-500/[0.01] to-transparent dark:via-purple-400/[0.03] animate-pulse-slow animation-delay-3000"></div>
       <section className="container mx-auto px-6 py-32 text-center relative z-10">
         <div className="max-w-6xl mx-auto space-y-16">
-          {/* Status Badge */}
-          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-background/80 backdrop-blur-xl border border-border/40 shadow-lg ring-1 ring-white/10">
+          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-background/90 dark:bg-background/70 backdrop-blur-xl border border-border/60 dark:border-border/40 shadow-2xl dark:shadow-2xl ring-1 ring-white/20 dark:ring-white/10 hover:scale-105 transition-all duration-500 group">
             <div className="flex items-center gap-2">
               <div className="relative">
                 <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
                 <div className="absolute inset-0 bg-green-500 rounded-full blur-sm opacity-50 animate-pulse"></div>
+                <div className="absolute inset-0 bg-green-500 rounded-full blur-md opacity-25 animate-pulse scale-150"></div>
               </div>
               <span className="text-sm font-medium text-foreground">Live Monitoring Active</span>
             </div>
-            <div className="w-px h-4 bg-border/60"></div>
-            <span className="text-xs text-muted-foreground font-medium">99.9% Uptime</span>
+            <div className="w-px h-4 bg-gradient-to-b from-transparent via-border/60 to-transparent"></div>
+            <span className="text-xs text-muted-foreground font-medium group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">99.9% Uptime</span>
           </div>
           
-          {/* Main Headline */}
+          {/* Enhanced Main Headline with improved gradients */}
           <div className="space-y-8">
             <h1 className="text-6xl md:text-8xl font-bold leading-[0.9] tracking-tight">
-              <span className="block bg-gradient-to-r from-foreground to-foreground/60 bg-clip-text text-transparent">
+              <span className="block bg-gradient-to-r from-foreground via-foreground to-foreground/70 bg-clip-text text-transparent">
                 Website Uptime
               </span>
-              <span className="block bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient-x">
+              <span className="block bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient-x drop-shadow-2xl">
                 Monitoring
               </span>
-              <span className="block text-2xl md:text-4xl font-normal text-muted-foreground mt-6">
-                that actually works
+              <span className="block text-2xl md:text-4xl font-normal text-muted-foreground mt-6 opacity-90">
+                that{' '}
+                <span className="relative inline-block">
+                  <span className="relative z-10">actually works</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 blur-lg rounded-lg transform rotate-1"></div>
+                </span>
               </span>
             </h1>
             
             <p className="text-xl md:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed font-light">
-              Monitor your websites with <span className="text-foreground font-medium">real-time alerts</span>, 
-              beautiful dashboards, and <span className="text-foreground font-medium">detailed analytics</span>. 
+              Monitor your websites with{' '}
+              <span className="relative text-foreground font-medium">
+                real-time alerts
+                <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full opacity-60"></div>
+              </span>, 
+              beautiful dashboards, and{' '}
+              <span className="relative text-foreground font-medium">
+                detailed analytics
+                <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full opacity-60"></div>
+              </span>. 
               Get notified instantly when something goes wrong.
             </p>
           </div>
           
-          {/* CTA Buttons */}
+          {/* Enhanced CTA Buttons with improved animations */}
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
             <Button 
               size="lg" 
-              className="relative group bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 hover:from-blue-600 hover:via-purple-600 hover:to-pink-600 text-white shadow-2xl hover:shadow-blue-500/30 transition-all duration-500 text-lg px-10 py-7 rounded-2xl border border-white/20 overflow-hidden"
+              className="relative group bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 hover:from-blue-600 hover:via-purple-600 hover:to-pink-600 text-white shadow-2xl hover:shadow-blue-500/30 dark:hover:shadow-blue-400/40 transition-all duration-500 text-lg px-10 py-7 rounded-2xl border border-white/20 overflow-hidden hover:scale-105"
             >
-              {/* Animated background */}
-              <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+              {/* Enhanced animated background */}
+              <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/30 to-white/0 -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               
-              <Zap className="w-5 h-5 mr-3 relative z-10" />
+              <Zap className="w-5 h-5 mr-3 relative z-10 group-hover:rotate-12 transition-transform duration-300" />
               <span className="relative z-10 font-semibold">Start Monitoring Free</span>
               <ArrowRight className="w-5 h-5 ml-3 group-hover:translate-x-1 transition-transform relative z-10" />
             </Button>
@@ -66,91 +78,122 @@ const page = () => {
             <Button 
               variant="outline" 
               size="lg" 
-              className="group border-2 border-border/40 hover:border-border/60 bg-background/80 backdrop-blur-xl hover:bg-background/90 text-lg px-10 py-7 rounded-2xl transition-all duration-300 hover:shadow-lg"
+              className="group border-2 border-border/40 hover:border-border/80 dark:hover:border-border/60 bg-background/90 dark:bg-background/70 backdrop-blur-xl hover:bg-background/95 dark:hover:bg-background/80 text-lg px-10 py-7 rounded-2xl transition-all duration-300 hover:shadow-lg hover:scale-105"
             >
               <Eye className="w-5 h-5 mr-3 group-hover:scale-110 transition-transform" />
               View Live Demo
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </Button>
           </div>
 
-          {/* Social Proof */}
-          <div className="flex flex-wrap justify-center items-center gap-12 pt-12 opacity-70">
-            <div className="flex items-center gap-3 text-sm">
+          {/* Enhanced Social Proof with better spacing and icons */}
+          <div className="flex flex-wrap justify-center items-center gap-12 pt-12 opacity-80 hover:opacity-100 transition-opacity duration-300">
+            <div className="flex items-center gap-3 text-sm group">
               <div className="flex">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                  <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400 group-hover:scale-110 transition-transform duration-200" style={{ animationDelay: `${i * 100}ms` }} />
                 ))}
               </div>
               <span className="font-medium">4.9/5 on reviews</span>
             </div>
-            <div className="flex items-center gap-2 text-sm">
-              <Users className="w-4 h-4" />
+            <div className="flex items-center gap-2 text-sm group">
+              <Users className="w-4 h-4 group-hover:scale-110 transition-transform" />
               <span className="font-medium">50,000+ websites monitored</span>
             </div>
-            <div className="flex items-center gap-2 text-sm">
-              <Shield className="w-4 h-4" />
+            <div className="flex items-center gap-2 text-sm group">
+              <Shield className="w-4 h-4 group-hover:scale-110 transition-transform" />
               <span className="font-medium">Enterprise security</span>
             </div>
           </div>
         </div>
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 border border-border/40 rounded-full flex justify-center p-1">
-            <div className="w-1 h-3 bg-muted-foreground rounded-full animate-pulse"></div>
+        {/* Enhanced Scroll Indicator */}
+        <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 animate-bounce group cursor-pointer">
+          <div className="w-6 h-10 border border-border/60 dark:border-border/40 rounded-full flex justify-center p-1 bg-background/50 backdrop-blur-sm hover:bg-background/70 transition-all duration-300">
+            <div className="w-1 h-3 bg-gradient-to-b from-blue-500 to-purple-500 rounded-full animate-pulse group-hover:scale-110 transition-transform"></div>
           </div>
         </div>
       </section>
 
-      {/* Dashboard Preview Section */}
+      {/* Enhanced Dashboard Preview Section */}
       <section className="container mx-auto px-6 py-24 relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="relative">
-            {/* Dashboard mockup container */}
-            <div className="relative bg-background/60 backdrop-blur-2xl border border-border/40 rounded-3xl p-8 shadow-2xl ring-1 ring-white/10 overflow-hidden">
-              {/* Gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-purple-500/5 rounded-3xl"></div>
+            {/* Enhanced dashboard mockup container with improved glass effect */}
+            <div className="relative bg-background/70 dark:bg-background/50 backdrop-blur-2xl border border-border/60 dark:border-border/40 rounded-3xl p-8 shadow-2xl ring-1 ring-white/20 dark:ring-white/10 overflow-hidden group hover:shadow-3xl transition-all duration-500">
+              {/* Enhanced gradient overlays */}
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/[0.03] via-transparent to-purple-500/[0.03] dark:from-blue-400/[0.08] dark:to-purple-400/[0.08] rounded-3xl"></div>
+              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.02] to-white/[0.05] dark:via-white/[0.05] dark:to-white/[0.02] rounded-3xl"></div>
               
-              {/* Mock dashboard content */}
+              {/* Mock dashboard content with enhanced styling */}
               <div className="relative space-y-6">
-                {/* Mock header */}
+                {/* Enhanced mock header */}
                 <div className="flex items-center justify-between pb-6 border-b border-border/30">
                   <div className="flex items-center gap-4">
-                    <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg"></div>
+                    <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg shadow-lg flex items-center justify-center">
+                      <Monitor className="w-4 h-4 text-white" />
+                    </div>
                     <span className="font-semibold text-lg">Dashboard</span>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-                    <span className="text-sm text-muted-foreground">All systems operational</span>
+                  <div className="flex items-center gap-3 px-3 py-1.5 rounded-full bg-green-500/10 border border-green-500/20">
+                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse relative">
+                      <div className="absolute inset-0 bg-green-500 rounded-full blur-sm opacity-50 animate-pulse"></div>
+                    </div>
+                    <span className="text-sm text-green-600 dark:text-green-400 font-medium">All systems operational</span>
                   </div>
                 </div>
                 
-                {/* Mock stats */}
+                {/* Enhanced mock stats with hover effects */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {[
-                    { label: "Total Sites", value: "12", color: "blue" },
-                    { label: "Operational", value: "12", color: "green" },
-                    { label: "Avg Uptime", value: "99.9%", color: "purple" },
-                    { label: "Avg Latency", value: "245ms", color: "orange" }
+                    { label: "Total Sites", value: "12", color: "blue", icon: Globe },
+                    { label: "Operational", value: "12", color: "green", icon: CheckCircle },
+                    { label: "Avg Uptime", value: "99.9%", color: "purple", icon: TrendingUp },
+                    { label: "Avg Latency", value: "245ms", color: "orange", icon: Gauge }
                   ].map((stat, i) => (
-                    <div key={i} className="bg-background/40 backdrop-blur-sm border border-border/30 rounded-xl p-4">
-                      <div className="text-xs text-muted-foreground mb-1">{stat.label}</div>
+                    <div key={i} className="bg-background/60 dark:bg-background/40 backdrop-blur-sm border border-border/40 dark:border-border/30 rounded-xl p-4 hover:scale-105 transition-all duration-300 group/stat">
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="text-xs text-muted-foreground">{stat.label}</div>
+                        <stat.icon className="w-4 h-4 text-muted-foreground group-hover/stat:scale-110 transition-transform" />
+                      </div>
                       <div className="text-xl font-bold">{stat.value}</div>
+                      <div className={`h-1 w-full rounded-full mt-2 bg-gradient-to-r ${
+                        stat.color === 'blue' ? 'from-blue-500 to-blue-600' :
+                        stat.color === 'green' ? 'from-green-500 to-green-600' :
+                        stat.color === 'purple' ? 'from-purple-500 to-purple-600' :
+                        'from-orange-500 to-orange-600'
+                      } opacity-30 group-hover/stat:opacity-60 transition-opacity`}></div>
                     </div>
                   ))}
                 </div>
                 
-                {/* Mock website cards */}
+                {/* Enhanced mock website cards */}
                 <div className="space-y-3">
-                  {["example.com", "mywebsite.io", "app.startup.com"].map((site, i) => (
-                    <div key={i} className="flex items-center justify-between p-4 bg-background/40 backdrop-blur-sm border border-border/30 rounded-xl">
+                  {[
+                    { name: "example.com", status: "good", location: "Global" },
+                    { name: "mywebsite.io", status: "good", location: "US East" },
+                    { name: "app.startup.com", status: "good", location: "EU West" }
+                  ].map((site, i) => (
+                    <div key={i} className="flex items-center justify-between p-4 bg-background/60 dark:bg-background/40 backdrop-blur-sm border border-border/40 dark:border-border/30 rounded-xl hover:scale-[1.02] transition-all duration-300 group/site">
                       <div className="flex items-center gap-3">
-                        <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                        <span className="font-medium">{site}</span>
+                        <div className="w-3 h-3 bg-green-500 rounded-full relative">
+                          <div className="absolute inset-0 bg-green-500 rounded-full blur-sm opacity-50 animate-pulse"></div>
+                        </div>
+                        <div>
+                          <span className="font-medium">{site.name}</span>
+                          <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                            <MapPin className="w-3 h-3" />
+                            {site.location}
+                          </div>
+                        </div>
                       </div>
                       <div className="flex gap-1">
                         {[...Array(10)].map((_, j) => (
-                          <div key={j} className="w-6 h-2 bg-green-500 rounded-full opacity-80"></div>
+                          <div 
+                            key={j} 
+                            className="w-6 h-2 bg-green-500 rounded-full opacity-80 group-hover/site:opacity-100 transition-all duration-300 hover:scale-110" 
+                            style={{ animationDelay: `${j * 50}ms` }}
+                          ></div>
                         ))}
                       </div>
                     </div>
@@ -212,28 +255,42 @@ const page = () => {
                 } rounded-3xl`}></div>
                 
                 <div className="relative">
-                  <div className={`w-16 h-16 rounded-2xl mb-6 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300 ${
-                    feature.color === 'blue' ? 'bg-gradient-to-br from-blue-500 to-blue-600' :
-                    feature.color === 'purple' ? 'bg-gradient-to-br from-purple-500 to-purple-600' :
-                    'bg-gradient-to-br from-green-500 to-green-600'
-                  }`}>
-                    <feature.icon className="w-8 h-8 text-white" />
+                  {/* Enhanced icon container with glow effect */}
+                  <div className={`w-16 h-16 rounded-2xl mb-6 flex items-center justify-center shadow-lg group-hover:shadow-2xl group-hover:scale-110 transition-all duration-500 bg-gradient-to-br ${
+                    feature.color === 'blue' ? 'from-blue-500 to-blue-600' :
+                    feature.color === 'purple' ? 'from-purple-500 to-purple-600' :
+                    'from-green-500 to-green-600'
+                  } relative overflow-hidden`}>
+                    <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent rounded-2xl"></div>
+                    <feature.icon className="w-8 h-8 text-white relative z-10 group-hover:rotate-6 transition-transform duration-300" />
+                    <div className={`absolute inset-0 bg-gradient-to-br ${
+                      feature.color === 'blue' ? 'from-blue-500 to-blue-600' :
+                      feature.color === 'purple' ? 'from-purple-500 to-purple-600' :
+                      'from-green-500 to-green-600'
+                    } blur-lg opacity-0 group-hover:opacity-50 transition-opacity duration-500 scale-150`}></div>
                   </div>
                   
-                  <h3 className="text-2xl font-bold mb-4">{feature.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed mb-6 font-light">
+                  <h3 className="text-2xl font-bold mb-4 group-hover:text-foreground transition-colors">{feature.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed mb-6 font-light group-hover:text-foreground/80 transition-colors">
                     {feature.description}
                   </p>
                   
-                  <div className="space-y-2">
+                  <div className="space-y-3">
                     {feature.features.map((item, j) => (
-                      <div key={j} className="flex items-center gap-2 text-sm">
-                        <CheckCircle className={`w-4 h-4 ${
-                          feature.color === 'blue' ? 'text-blue-500' :
-                          feature.color === 'purple' ? 'text-purple-500' :
-                          'text-green-500'
-                        }`} />
-                        <span className="text-muted-foreground">{item}</span>
+                      <div key={j} className="flex items-center gap-3 text-sm text-muted-foreground group-hover:text-foreground/70 transition-all duration-300" style={{ animationDelay: `${j * 100}ms` }}>
+                        <div className="relative">
+                          <CheckCircle className={`w-4 h-4 ${
+                            feature.color === 'blue' ? 'text-blue-500' :
+                            feature.color === 'purple' ? 'text-purple-500' :
+                            'text-green-500'
+                          } group-hover:scale-110 transition-transform duration-300`} />
+                          <div className={`absolute inset-0 w-4 h-4 ${
+                            feature.color === 'blue' ? 'bg-blue-500' :
+                            feature.color === 'purple' ? 'bg-purple-500' :
+                            'bg-green-500'
+                          } blur-sm opacity-0 group-hover:opacity-40 transition-opacity duration-300 rounded-full`}></div>
+                        </div>
+                        <span className="group-hover:translate-x-1 transition-transform duration-300">{item}</span>
                       </div>
                     ))}
                   </div>
@@ -244,77 +301,85 @@ const page = () => {
         </div>
       </section>
 
-      {/* Integrations Section */}
+      {/* Enhanced Integrations Section */}
       <section className="container mx-auto px-6 py-24 relative z-10">
         <div className="max-w-6xl mx-auto text-center">
           <h2 className="text-5xl md:text-6xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-foreground to-foreground/60 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-foreground via-foreground to-foreground/70 bg-clip-text text-transparent">
               Integrates with your tools
             </span>
           </h2>
-          <p className="text-xl text-muted-foreground mb-16 font-light">
-            Connect with the services you already use
+          <p className="text-xl text-muted-foreground mb-16 font-light opacity-90">
+            Connect with the services you already use and love
           </p>
           
           <div className="grid grid-cols-2 md:grid-cols-6 gap-6">
             {[
-              { name: "Email", icon: Mail },
-              { name: "SMS", icon: Smartphone },
-              { name: "Slack", icon: Slack },
-              { name: "Webhooks", icon: Activity },
-              { name: "Teams", icon: Users },
-              { name: "Discord", icon: Globe }
+              { name: "Email", icon: Mail, color: "from-blue-500 to-blue-600" },
+              { name: "SMS", icon: Smartphone, color: "from-green-500 to-green-600" },
+              { name: "Slack", icon: Slack, color: "from-purple-500 to-purple-600" },
+              { name: "Webhooks", icon: Activity, color: "from-orange-500 to-orange-600" },
+              { name: "Teams", icon: Users, color: "from-indigo-500 to-indigo-600" },
+              { name: "Discord", icon: Globe, color: "from-violet-500 to-violet-600" }
             ].map((integration, i) => (
               <div 
                 key={i}
-                className="group p-6 rounded-2xl bg-background/40 backdrop-blur-xl border border-border/40 hover:border-border/60 transition-all duration-300 hover:scale-105"
+                className="group p-6 rounded-2xl bg-background/60 dark:bg-background/40 backdrop-blur-xl border border-border/50 dark:border-border/30 hover:border-border/80 dark:hover:border-border/50 transition-all duration-500 hover:scale-110 hover:-translate-y-2 cursor-pointer"
+                style={{ animationDelay: `${i * 100}ms` }}
               >
-                <div className="w-12 h-12 mx-auto mb-4 rounded-xl bg-gradient-to-br from-muted to-muted/50 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <integration.icon className="w-6 h-6 text-foreground/70" />
+                <div className={`w-12 h-12 mx-auto mb-4 rounded-xl bg-gradient-to-br ${integration.color} flex items-center justify-center group-hover:scale-125 group-hover:rotate-6 transition-all duration-500 shadow-lg group-hover:shadow-2xl relative overflow-hidden`}>
+                  <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent rounded-xl"></div>
+                  <integration.icon className="w-6 h-6 text-white relative z-10" />
+                  <div className={`absolute inset-0 bg-gradient-to-br ${integration.color} blur-lg opacity-0 group-hover:opacity-60 transition-opacity duration-500 scale-150`}></div>
                 </div>
-                <div className="text-sm font-medium text-muted-foreground">{integration.name}</div>
+                <div className="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors duration-300">{integration.name}</div>
+                
+                {/* Subtle glow effect */}
+                <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${integration.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500 -z-10`}></div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Final CTA */}
+      {/* Enhanced Final CTA */}
       <section className="container mx-auto px-6 py-32 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="relative p-16 rounded-3xl bg-background/60 backdrop-blur-2xl border border-border/40 shadow-2xl ring-1 ring-white/10 overflow-hidden">
-            {/* Enhanced background effects */}
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/5 to-pink-500/10 rounded-3xl"></div>
-            <div className="absolute inset-0 bg-gradient-to-r from-white/5 via-transparent to-white/5 rounded-3xl"></div>
+          <div className="relative p-16 rounded-3xl bg-background/70 dark:bg-background/50 backdrop-blur-2xl border border-border/60 dark:border-border/40 shadow-2xl ring-1 ring-white/20 dark:ring-white/10 overflow-hidden group hover:shadow-3xl transition-all duration-700">
+            {/* Enhanced background effects with improved dark mode */}
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/[0.06] via-purple-500/[0.03] to-pink-500/[0.06] dark:from-blue-400/[0.12] dark:via-purple-400/[0.06] dark:to-pink-400/[0.12] rounded-3xl"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-white/[0.03] via-transparent to-white/[0.03] dark:from-white/[0.06] dark:to-white/[0.06] rounded-3xl"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-transparent via-blue-500/[0.01] to-transparent dark:via-blue-400/[0.03] rounded-3xl animate-pulse-slow"></div>
             
             <div className="relative space-y-12">
               <div className="space-y-6">
                 <h2 className="text-5xl md:text-6xl font-bold leading-tight">
-                  <span className="bg-gradient-to-r from-foreground to-foreground/60 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-foreground via-foreground to-foreground/70 bg-clip-text text-transparent">
                     Start monitoring
                   </span>
                   <br />
-                  <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient-x">
                     in 30 seconds
                   </span>
                 </h2>
                 
-                <p className="text-xl text-muted-foreground max-w-3xl mx-auto font-light">
-                  Join thousands of businesses keeping their websites online 24/7
+                <p className="text-xl text-muted-foreground max-w-3xl mx-auto font-light opacity-90">
+                  Join thousands of businesses keeping their websites online 24/7 with our reliable monitoring
                 </p>
               </div>
               
               <div className="flex flex-col sm:flex-row gap-6 justify-center">
                 <Button 
                   size="lg" 
-                  className="relative group bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 hover:from-blue-600 hover:via-purple-600 hover:to-pink-600 text-white shadow-2xl hover:shadow-blue-500/30 transition-all duration-500 text-lg px-10 py-7 rounded-2xl border border-white/20 overflow-hidden"
+                  className="relative group bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 hover:from-blue-600 hover:via-purple-600 hover:to-pink-600 text-white shadow-2xl hover:shadow-blue-500/40 dark:hover:shadow-blue-400/50 transition-all duration-500 text-lg px-10 py-7 rounded-2xl border border-white/20 overflow-hidden hover:scale-105"
                   asChild
                 >
                   <Link href="/dashboard">
-                    {/* Animated background */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                    {/* Enhanced animated background */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/30 to-white/0 -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     
-                    <Zap className="w-5 h-5 mr-3 relative z-10" />
+                    <Zap className="w-5 h-5 mr-3 relative z-10 group-hover:rotate-12 transition-transform duration-300" />
                     <span className="relative z-10 font-semibold">Get Started Free</span>
                     <ArrowRight className="w-5 h-5 ml-3 group-hover:translate-x-1 transition-transform relative z-10" />
                   </Link>
@@ -323,17 +388,34 @@ const page = () => {
                 <Button 
                   variant="outline" 
                   size="lg" 
-                  className="group border-2 border-border/40 hover:border-border/60 bg-background/80 backdrop-blur-xl hover:bg-background/90 text-lg px-10 py-7 rounded-2xl transition-all duration-300"
+                  className="group border-2 border-border/50 dark:border-border/30 hover:border-border/80 dark:hover:border-border/60 bg-background/90 dark:bg-background/70 backdrop-blur-xl hover:bg-background/95 dark:hover:bg-background/80 text-lg px-10 py-7 rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-lg"
                 >
                   <Users className="w-5 h-5 mr-3 group-hover:scale-110 transition-transform" />
                   Contact Sales
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </Button>
               </div>
               
-              <div className="text-sm text-muted-foreground">
-                No credit card required • Free 14-day trial • Cancel anytime
+              <div className="text-sm text-muted-foreground opacity-80 hover:opacity-100 transition-opacity duration-300">
+                <span className="inline-flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-green-500" />
+                  No credit card required
+                </span>
+                <span className="mx-2 opacity-50">•</span>
+                <span className="inline-flex items-center gap-2">
+                  <Clock className="w-4 h-4 text-blue-500" />
+                  Free 14-day trial
+                </span>
+                <span className="mx-2 opacity-50">•</span>
+                <span className="inline-flex items-center gap-2">
+                  <Shield className="w-4 h-4 text-purple-500" />
+                  Cancel anytime
+                </span>
               </div>
             </div>
+            
+            {/* Subtle shine effect on hover */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.02] to-white/[0.05] dark:via-white/[0.05] dark:to-white/[0.08] opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-3xl pointer-events-none"></div>
           </div>
         </div>
       </section>
