@@ -10,6 +10,7 @@ import {
   UserButton,
 } from '@clerk/nextjs'
 import AppNavBar from "@/components/AppNavBar";
+import AppFooter from "@/components/AppFooter";
 import { ThemeProvider } from "@/components/theme-provider";
 
 const geistSans = Geist({
@@ -34,91 +35,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <ClerkProvider
-        appearance={{
-          baseTheme: undefined,
-          variables: {
-            colorPrimary: "#3b82f6",
-            colorBackground: "#000000",
-            colorInputBackground: "#1a1a1a",
-            colorInputText: "#ffffff",
-            colorText: "#ffffff",
-            colorTextSecondary: "#9ca3af",
-            colorShimmer: "#1f2937",
-            colorNeutral: "#374151",
-            colorDanger: "#ef4444",
-            colorSuccess: "#10b981",
-            colorWarning: "#f59e0b",
-          },
-          elements: {
-            modalContent: {
-              backgroundColor: "#000000",
-              border: "1px solid #374151",
-              borderRadius: "16px",
-              boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.8)",
-            },
-            modalCloseButton: {
-              color: "#9ca3af",
-              "&:hover": {
-                color: "#ffffff",
-              },
-            },
-            card: {
-              backgroundColor: "#000000",
-              border: "1px solid #374151",
-              borderRadius: "12px",
-            },
-            headerTitle: {
-              color: "#ffffff",
-            },
-            headerSubtitle: {
-              color: "#9ca3af",
-            },
-            socialButtonsBlockButton: {
-              backgroundColor: "#1a1a1a",
-              border: "1px solid #374151",
-              color: "#ffffff",
-              "&:hover": {
-                backgroundColor: "#2d2d2d",
-              },
-            },
-            formButtonPrimary: {
-              backgroundColor: "#3b82f6",
-              border: "none",
-              "&:hover": {
-                backgroundColor: "#2563eb",
-              },
-            },
-            formFieldInput: {
-              backgroundColor: "#1a1a1a",
-              border: "1px solid #374151",
-              color: "#ffffff",
-              "&:focus": {
-                borderColor: "#3b82f6",
-                boxShadow: "0 0 0 2px rgba(59, 130, 246, 0.2)",
-              },
-            },
-            formFieldLabel: {
-              color: "#e5e7eb",
-            },
-            footerActionText: {
-              color: "#9ca3af",
-            },
-            footerActionLink: {
-              color: "#3b82f6",
-              "&:hover": {
-                color: "#2563eb",
-              },
-            },
-            dividerLine: {
-              backgroundColor: "#374151",
-            },
-            dividerText: {
-              color: "#9ca3af",
-            },
-          },
-        }}
-      >
+      <ClerkProvider>
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
@@ -133,6 +50,7 @@ export default function RootLayout({
             <main className="pt-24">
               {children}
             </main>
+            <AppFooter />
           </ThemeProvider>
         </body>
       </ClerkProvider>
