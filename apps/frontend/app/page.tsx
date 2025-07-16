@@ -26,8 +26,6 @@ const page = () => {
             <div className="w-px h-4 bg-gradient-to-b from-transparent via-border/60 to-transparent"></div>
             <span className="text-xs text-muted-foreground font-medium group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">99.9% Uptime</span>
           </div>
-          
-          {/* Enhanced Main Headline with improved gradients */}
           <div className="space-y-8">
             <h1 className="text-6xl md:text-8xl font-bold leading-[0.9] tracking-tight">
               <span className="block bg-gradient-to-r from-foreground via-foreground to-foreground/70 bg-clip-text text-transparent">
@@ -49,18 +47,15 @@ const page = () => {
               Monitor your websites with{' '}
               <span className="relative text-foreground font-medium">
                 real-time alerts
-                <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full opacity-60"></div>
               </span>, 
               beautiful dashboards, and{' '}
               <span className="relative text-foreground font-medium">
                 detailed analytics
-                <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full opacity-60"></div>
               </span>. 
               Get notified instantly when something goes wrong.
             </p>
           </div>
           
-          {/* Enhanced CTA Buttons with improved animations */}
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
             <Button 
               size="lg" 
@@ -85,8 +80,6 @@ const page = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </Button>
           </div>
-
-          {/* Enhanced Social Proof with better spacing and icons */}
           <div className="flex flex-wrap justify-center items-center gap-12 pt-12 opacity-80 hover:opacity-100 transition-opacity duration-300">
             <div className="flex items-center gap-3 text-sm group">
               <div className="flex">
