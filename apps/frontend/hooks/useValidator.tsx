@@ -2,7 +2,7 @@
 "use client";
 import { useAuth } from "@clerk/nextjs";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 
 const API_BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "";
 
@@ -23,38 +23,86 @@ interface Validator {
     }[];
 }
 
-export function useValidator(publicKey: string) {
+interface UseValidatorReturn {
+    validator: Validator | null;
+    loading: boolean;
+    error: string | null;
+    refreshValidator: () => Promise<void>;
+}
+
+export function useValidator(publicKey: string): UseValidatorReturn {
     const { getToken } = useAuth();
     const [validator, setValidator] = useState<Validator | null>(null);
+    const [loading, setLoading] = useState<boolean>(false);
+    const [error, setError] = useState<string | null>(null);
 
-    async function refreshValidator() {
-        if (!publicKey) return;
+    const refreshValidator = useCallback(async () => {
+        if (!publicKey) {
+            setValidator(null);
+            setError(null);
+            return;
+        }
 
-        const token = await getToken();
-        const apiUrl = `${API_BACKEND_URL}/api/v1/validator/${publicKey}`;
+        setLoading(true);
+        setError(null);
 
         try {
+            const token = await getToken();
+            const apiUrl = `${API_BACKEND_URL}/api/v1/validator/${publicKey}`;
+
             const response = await axios.get(apiUrl, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
+                timeout: 10000, // 10 second timeout
             });
-            setValidator(response.data.data);
-        } catch (error) {
+
+            if (response.data && response.data.data) {
+                setValidator(response.data.data);
+            } else {
+                throw new Error("Invalid response format");
+            }
+        } catch (error: unknown) {
             console.error("Failed to fetch validator data:", error);
+            
+            if (axios.isAxiosError(error)) {
+                if (error.response?.status === 404) {
+                    setError("Validator not found. Please check your public key.");
+                } else if (error.response?.status === 401) {
+                    setError("Authentication failed. Please try logging in again.");
+                } else if (error.code === 'ECONNABORTED') {
+                    setError("Request timeout. Please check your connection and try again.");
+                } else if (error.message === "Network Error") {
+                    setError("Network error. Please check your internet connection.");
+                } else {
+                    setError("Failed to load validator data. Please try again.");
+                }
+            } else {
+                setError("An unexpected error occurred. Please try again.");
+            }
             setValidator(null);
+        } finally {
+            setLoading(false);
         }
-    }
+    }, [publicKey, getToken]);
 
     useEffect(() => {
         refreshValidator();
 
-        const interval = setInterval(() => {
-            refreshValidator();
-        }, 1000 * 60 * 1); // Refresh every minute
+        // Set up interval for auto-refresh only if we have a public key
+        if (publicKey) {
+            const interval = setInterval(() => {
+                refreshValidator();
+            }, 1000 * 60 * 2); // Refresh every 2 minutes
 
-        return () => clearInterval(interval);
-    }, [publicKey]);
+            return () => clearInterval(interval);
+        }
+    }, [publicKey, refreshValidator]);
 
-    return { validator, refreshValidator };
+    return { 
+        validator, 
+        loading, 
+        error, 
+        refreshValidator 
+    };
 }
