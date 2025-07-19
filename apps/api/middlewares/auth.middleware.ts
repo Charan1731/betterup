@@ -14,7 +14,6 @@ const authMiddleware = async (req: Request, res: Response, next: NextFunction) =
             secretKey: process.env.CLERK_SECRET_KEY
         });
         
-        console.log(payload);
         if (!payload.sub) {
             res.status(401).json({ error: 'Unauthorized' });
             return;

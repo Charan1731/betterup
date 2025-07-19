@@ -11,6 +11,7 @@ import {
 } from '@clerk/nextjs'
 import AppNavBar from "@/components/AppNavBar";
 import AppFooter from "@/components/AppFooter";
+import { SolanaWalletProvider } from "@/components/SolanaWalletProvider";
 import { ThemeProvider } from "@/components/theme-provider";
 
 const geistSans = Geist({
@@ -46,11 +47,13 @@ export default function RootLayout({
               disableTransitionOnChange
               storageKey="uptime-theme"
           >
-            <AppNavBar />
-            <main className="pt-24">
-              {children}
-            </main>
-            <AppFooter />
+            <SolanaWalletProvider>
+              <AppNavBar />
+              <main className="pt-24">
+                {children}
+              </main>
+              <AppFooter />
+            </SolanaWalletProvider>
           </ThemeProvider>
         </body>
       </ClerkProvider>
