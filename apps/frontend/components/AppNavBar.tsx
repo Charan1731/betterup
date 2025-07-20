@@ -45,7 +45,7 @@ const AppNavBar = () => {
               <div className="flex items-center gap-3">
                 <div>
                   <h1 className="text-xl font-bold font-nunito bg-gradient-to-r from-foreground via-blue-600 to-purple-600 bg-clip-text text-transparent group-hover/logo:from-blue-600 group-hover/logo:to-purple-600 transition-all duration-300">
-                    Uptime Monitor
+                    Heimdall
                   </h1>
                   <div className="flex items-center gap-2 mt-0.5">
                     <div className="flex items-center gap-1.5">
@@ -65,8 +65,20 @@ const AppNavBar = () => {
               </div>
             </Link>
             
-            {/* Enhanced Action Section */}
             <div className="flex items-center gap-4">
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="relative text-muted-foreground hover:text-foreground backdrop-blur-sm bg-background/30 hover:bg-background/50 border border-border/40 hover:border-border/60 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg group/validator" 
+                asChild
+              >
+                <Link href="/validator">
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-xl opacity-0 group-hover/validator:opacity-100 transition-opacity duration-300"></div>
+                  <Zap className="w-4 h-4 mr-2 relative z-10" />
+                  <span className="font-medium relative z-10">Validator</span>
+                </Link>
+              </Button>
+              
               {/* Theme toggle with enhanced styling */}
               <div className="relative">
                 <ThemeToggle />
@@ -115,19 +127,7 @@ const AppNavBar = () => {
                       </Link>
                     </Button>
                     
-                    <Button 
-                      variant="ghost" 
-                      size="sm" 
-                      className="relative text-muted-foreground hover:text-foreground backdrop-blur-sm bg-background/30 hover:bg-background/50 border border-border/40 hover:border-border/60 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg group/validator" 
-                      asChild
-                    >
-                      <Link href="/validator">
-                        <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-xl opacity-0 group-hover/validator:opacity-100 transition-opacity duration-300"></div>
-                        <Zap className="w-4 h-4 mr-2 relative z-10" />
-                        <span className="font-medium relative z-10">Validator</span>
-                      </Link>
-                    </Button>
-                    
+
                     {/* Enhanced user button with glow effect */}
                     <div className="relative group/user">
                       <div className="absolute inset-0 bg-gradient-to-r from-blue-500/30 to-purple-500/30 rounded-full blur-lg opacity-0 group-hover/user:opacity-100 transition-opacity duration-300"></div>

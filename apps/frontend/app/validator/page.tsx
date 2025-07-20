@@ -23,6 +23,7 @@ import {
   Timer,
   Gauge
 } from 'lucide-react';
+import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 
 const WalletMultiButton = dynamic(
     () => import('@solana/wallet-adapter-react-ui').then(mod => mod.WalletMultiButton),
@@ -60,10 +61,11 @@ export default function ValidatorDashboard() {
         return 'text-yellow-500 bg-yellow-500/10 border-yellow-500/20';
       case 'error':
       case 'down':
+
       case 'offline':
         return 'text-red-500 bg-red-500/10 border-red-500/20';
       default:
-        return 'text-gray-500 bg-gray-500/10 border-gray-500/20';
+        return 'text-red-500 bg-red-500/10 border-red-500/20';
     }
   };
 
@@ -98,7 +100,7 @@ export default function ValidatorDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-background relative overflow-hidden -mt-10">
+    <div className="min-h-screen bg-background relative overflow-hidden -mt-16">
       {/* Enhanced background effects matching homepage */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-500/[0.02] via-background to-purple-500/[0.02] dark:from-blue-500/[0.08] dark:to-purple-500/[0.08]"></div>
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-br from-blue-500/20 to-blue-600/10 dark:from-blue-400/30 dark:to-blue-500/20 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-40 dark:opacity-60 animate-blob"></div>
@@ -305,7 +307,7 @@ export default function ValidatorDashboard() {
                         <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
                           <Zap className="w-6 h-6 text-white" />
                         </div>
-                        <div className="text-3xl font-bold text-purple-500">{validator.pendingSol}</div>
+                        <div className="text-3xl font-bold text-purple-500">{(validator.pendingSol / LAMPORTS_PER_SOL)}</div>
                       </div>
                       <h3 className="text-lg font-semibold mb-2">Pending SOL</h3>
                       <p className="text-sm text-muted-foreground">Rewards pending</p>
@@ -338,7 +340,7 @@ export default function ValidatorDashboard() {
                           </TableRow>
                         </TableHeader>
                         <TableBody>
-                          {validator.ticks.map((tick) => (
+                          {validator.ticks.filter((_,i) => i%2 === 0).map((tick) => (
                             <TableRow key={tick.id} className="border-border/30 hover:bg-muted/30 group/row transition-all duration-200">
                               <TableCell className="font-medium">
                                 <div className="flex items-center gap-3">

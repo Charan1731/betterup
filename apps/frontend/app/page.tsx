@@ -1,9 +1,22 @@
+"use client";
 import React from 'react'
 import { Button } from '@/components/ui/button'
-import { Monitor, Shield, Clock, BarChart3, ArrowRight, CheckCircle, Zap, Globe, Users, TrendingUp, Star, ChevronDown, Activity, Bell, Eye, Smartphone, Mail, Slack, AlertTriangle, Gauge, MapPin, MessageSquare } from 'lucide-react'
+import { Monitor, Shield, BarChart3, ArrowRight, CheckCircle, Zap, Globe, Users, TrendingUp, Star, Activity, Bell, Eye, Smartphone, Mail, Slack, Gauge, MapPin, Clock } from 'lucide-react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { useAuth } from '@clerk/nextjs'
 
-const page = () => {
+const Page = () => {
+
+  const router = useRouter();
+  const {getToken} = useAuth();
+  const handleSignIn = async () => {
+    const token = await getToken();
+    if (token) {
+      router.push('/dashboard');
+    }
+  }
+
   return (
     <div className="min-h-screen bg-background relative overflow-hidden -mt-20">
       <div className="absolute inset-0 bg-gradient-to-br from-blue-500/[0.02] via-background to-purple-500/[0.02] dark:from-blue-500/[0.08] dark:to-purple-500/[0.08]"></div>
@@ -59,7 +72,8 @@ const page = () => {
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
             <Button 
               size="lg" 
-              className="relative group bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 hover:from-blue-600 hover:via-purple-600 hover:to-pink-600 text-white shadow-2xl hover:shadow-blue-500/30 dark:hover:shadow-blue-400/40 transition-all duration-500 text-lg px-10 py-7 rounded-2xl border border-white/20 overflow-hidden hover:scale-105"
+              className="relative group cursor-pointer bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 hover:from-blue-600 hover:via-purple-600 hover:to-pink-600 text-white shadow-2xl hover:shadow-blue-500/30 dark:hover:shadow-blue-400/40 transition-all duration-500 text-lg px-10 py-7 rounded-2xl border border-white/20 overflow-hidden hover:scale-105"
+              onClick={() => handleSignIn()}
             >
               {/* Enhanced animated background */}
               <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/30 to-white/0 -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
@@ -416,4 +430,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

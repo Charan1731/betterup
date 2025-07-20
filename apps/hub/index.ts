@@ -10,6 +10,48 @@ const availableValidators: { validatorId: string, socket: ServerWebSocket<unknow
 const CALLBACKS : { [callbackId: string]: (data: IncomingMessage) => void } = {}
 const COST_PER_VALIDATION = 100; // in lamports
 
+async function getLocationFromIP(ip: string): Promise<string> {
+    // Handle localhost/private IPs
+    if (ip === '127.0.0.1' || ip === 'localhost' || ip.startsWith('192.168.') || ip.startsWith('10.') || ip.startsWith('172.')) {
+        return 'Local';
+    }
+
+    try {
+        // Use ipapi.co free service for IP geolocation
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 5000);
+        
+        const response = await fetch(`https://ipapi.co/${ip}/json/`, {
+            signal: controller.signal,
+            headers: {
+                'User-Agent': 'UptimeMonitor/1.0'
+            }
+        });
+        
+        clearTimeout(timeoutId);
+
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+        }
+
+        const data = await response.json();
+        
+        // Return city, region, country format if available
+        if (data.city && data.region && data.country_name) {
+            return `${data.city}, ${data.region}, ${data.country_name}`;
+        } else if (data.region && data.country_name) {
+            return `${data.region}, ${data.country_name}`;
+        } else if (data.country_name) {
+            return data.country_name;
+        } else {
+            return 'Unknown';
+        }
+    } catch (error) {
+        console.error(`Failed to get location for IP ${ip}:`, error);
+        return 'Unknown';
+    }
+}
+
 Bun.serve({
     fetch(req, server) {
       if (server.upgrade(req)) {
@@ -54,6 +96,15 @@ async function signupHandler(ws: ServerWebSocket<unknown>, { ip, publicKey, sign
     });
 
     if (validatorDb) {
+        // Update location if it's currently unknown or empty
+        if (validatorDb.location === 'unknown' || validatorDb.location === '' || !validatorDb.location) {
+            const location = await getLocationFromIP(ip);
+            await prismaClient.validator.update({
+                where: { id: validatorDb.id },
+                data: { location, ip }
+            });
+        }
+
         ws.send(JSON.stringify({
             type: 'signup',
             data: {
@@ -70,12 +121,13 @@ async function signupHandler(ws: ServerWebSocket<unknown>, { ip, publicKey, sign
         return;
     }
     
-    //TODO: Given the ip, return the location
+    // Get location from IP address
+    const location = await getLocationFromIP(ip);
     const validator = await prismaClient.validator.create({
         data: {
             ip,
             publicKey,
-            location: 'unknown',
+            location,
         },
     });
 
@@ -120,7 +172,8 @@ setInterval(async () => {
                 type: 'validate',
                 data: {
                     url: website.url,
-                    callbackId
+                    callbackId,
+                    websiteId: website.id
                 },
             }));
 

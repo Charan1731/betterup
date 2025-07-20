@@ -47,15 +47,9 @@ export function useValidator(publicKey: string): UseValidatorReturn {
         setError(null);
 
         try {
-            const token = await getToken();
             const apiUrl = `${API_BACKEND_URL}/api/v1/validator/${publicKey}`;
 
-            const response = await axios.get(apiUrl, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-                timeout: 10000, // 10 second timeout
-            });
+            const response = await axios.get(apiUrl);
 
             if (response.data && response.data.data) {
                 setValidator(response.data.data);

@@ -1,10 +1,15 @@
 
 import { Router } from "express";
 import { getValidatorDetails } from "../controllers/validator.controller";
-import authMiddleware from "../middlewares/auth.middleware";
 
 const router = Router();
 
-router.get("/:publicKey", authMiddleware, getValidatorDetails);
+router.get("/:publicKey", async (req, res, next) => {
+  try {
+    await getValidatorDetails(req, res);
+  } catch (err) {
+    next(err);
+  }
+});
 
 export default router;
