@@ -308,6 +308,259 @@ const Page = () => {
         </div>
       </section>
 
+      {/* Pricing Section */}
+      <section className="container mx-auto px-6 py-24 relative z-10">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-20">
+            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-background/90 dark:bg-background/70 backdrop-blur-xl border border-border/60 dark:border-border/40 shadow-lg ring-1 ring-white/20 dark:ring-white/10 mb-8 hover:scale-105 transition-all duration-500">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                <span className="text-sm font-medium text-foreground">Simple, transparent pricing</span>
+              </div>
+            </div>
+            
+            <h2 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+              <span className="bg-gradient-to-r from-foreground to-foreground/60 bg-clip-text text-transparent">
+                Choose your plan
+              </span>
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto font-light">
+              Start free and scale as you grow. All plans include our core monitoring features.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {[
+              {
+                name: "Starter",
+                price: "$0",
+                period: "forever",
+                description: "Perfect for personal projects and small websites",
+                popular: false,
+                color: "blue",
+                features: [
+                  "Up to 5 websites",
+                  "5-minute monitoring intervals",
+                  "Email notifications",
+                  "Basic uptime reporting",
+                  "24/7 monitoring",
+                  "SSL certificate monitoring",
+                  "1 month data retention"
+                ],
+                limitations: ["Limited to 5 websites", "5-minute intervals only", "Basic support"],
+                cta: "Get Started Free",
+                ctaVariant: "outline" as const
+              },
+              {
+                name: "Professional",
+                price: "$29",
+                period: "per month",
+                description: "Ideal for growing businesses and development teams",
+                popular: true,
+                color: "purple",
+                features: [
+                  "Up to 50 websites",
+                  "1-minute monitoring intervals",
+                  "Multi-channel notifications",
+                  "Advanced analytics & reports",
+                  "Status pages",
+                  "API access",
+                  "Custom alert escalation",
+                  "12 months data retention",
+                  "Priority support"
+                ],
+                limitations: [],
+                cta: "Start Pro Trial",
+                ctaVariant: "default" as const
+              },
+              {
+                name: "Enterprise",
+                price: "$99",
+                period: "per month",
+                description: "Advanced monitoring for large organizations",
+                popular: false,
+                color: "gradient",
+                features: [
+                  "Unlimited websites",
+                  "30-second monitoring intervals",
+                  "Custom integrations",
+                  "White-label solutions",
+                  "Advanced user management",
+                  "SLA guarantees",
+                  "Dedicated success manager",
+                  "Unlimited data retention",
+                  "24/7 phone support"
+                ],
+                limitations: [],
+                cta: "Contact Sales",
+                ctaVariant: "outline" as const
+              }
+            ].map((plan, i) => (
+              <div 
+                key={i} 
+                className={`group relative rounded-3xl transition-all duration-500 hover:-translate-y-2 ${
+                  plan.popular 
+                    ? 'scale-105 z-10' 
+                    : 'hover:scale-105'
+                }`}
+              >
+                {/* Popular badge */}
+                {plan.popular && (
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-20">
+                    <div className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-2 rounded-full text-sm font-semibold shadow-lg border border-white/20">
+                      <div className="flex items-center gap-2">
+                        <Star className="w-4 h-4 fill-current" />
+                        Most Popular
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Card container */}
+                <div className={`relative p-8 h-full rounded-3xl backdrop-blur-xl border shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden ${
+                  plan.popular
+                    ? 'bg-background/80 dark:bg-background/60 border-purple-500/30 hover:border-purple-500/50 shadow-purple-500/20 hover:shadow-purple-500/30'
+                    : 'bg-background/60 dark:bg-background/40 border-border/40 dark:border-border/30 hover:border-border/60 dark:hover:border-border/50'
+                }`}>
+                  
+                  {/* Background gradient effects */}
+                  <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl ${
+                    plan.color === 'blue' ? 'bg-gradient-to-br from-blue-500/10 to-blue-600/5' :
+                    plan.color === 'purple' ? 'bg-gradient-to-br from-purple-500/10 to-purple-600/5' :
+                    'bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-pink-500/10'
+                  }`}></div>
+
+                  {/* Enhanced glow for popular plan */}
+                  {plan.popular && (
+                    <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 via-purple-500/10 to-pink-500/20 rounded-3xl"></div>
+                  )}
+
+                  <div className="relative">
+                    {/* Plan header */}
+                    <div className="mb-8">
+                      <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
+                      <p className="text-muted-foreground text-sm leading-relaxed">{plan.description}</p>
+                    </div>
+
+                    {/* Pricing */}
+                    <div className="mb-8">
+                      <div className="flex items-baseline gap-2 mb-2">
+                        <span className={`text-5xl font-bold ${
+                          plan.popular ? 'bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent' : ''
+                        }`}>
+                          {plan.price}
+                        </span>
+                        <span className="text-muted-foreground text-lg">/{plan.period}</span>
+                      </div>
+                      {plan.name === "Professional" && (
+                        <div className="text-sm text-muted-foreground">
+                          <span className="line-through opacity-60">$39/month</span>
+                          <span className="ml-2 text-green-600 dark:text-green-400 font-medium">Save 26%</span>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Features list */}
+                    <div className="mb-8 space-y-4">
+                      {plan.features.map((feature, j) => (
+                        <div key={j} className="flex items-start gap-3 text-sm group/feature">
+                          <div className="relative mt-0.5">
+                            <CheckCircle className={`w-4 h-4 ${
+                              plan.color === 'blue' ? 'text-blue-500' :
+                              plan.color === 'purple' ? 'text-purple-500' :
+                              'text-gradient-to-r from-purple-500 to-pink-500'
+                            } group-hover/feature:scale-110 transition-transform duration-300`} />
+                            <div className={`absolute inset-0 w-4 h-4 ${
+                              plan.color === 'blue' ? 'bg-blue-500' :
+                              plan.color === 'purple' ? 'bg-purple-500' :
+                              'bg-purple-500'
+                            } blur-sm opacity-0 group-hover/feature:opacity-40 transition-opacity duration-300 rounded-full`}></div>
+                          </div>
+                          <span className="text-foreground/90 group-hover/feature:text-foreground transition-colors duration-300 group-hover/feature:translate-x-1">
+                            {feature}
+                          </span>
+                        </div>
+                      ))}
+                      
+                      {/* Limitations for free plan */}
+                      {plan.limitations.length > 0 && (
+                        <div className="pt-4 border-t border-border/30">
+                          <div className="text-xs text-muted-foreground mb-2 font-medium">Limitations:</div>
+                          {plan.limitations.map((limitation, j) => (
+                            <div key={j} className="flex items-start gap-3 text-xs text-muted-foreground">
+                              <div className="w-1 h-1 bg-muted-foreground rounded-full mt-2 opacity-60"></div>
+                              <span>{limitation}</span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* CTA Button */}
+                    <Button 
+                      className={`w-full relative group/btn transition-all duration-500 ${
+                        plan.popular 
+                          ? 'bg-gradient-to-r from-purple-500 via-purple-500 to-pink-500 hover:from-purple-600 hover:via-purple-600 hover:to-pink-600 text-white shadow-lg hover:shadow-purple-500/30 dark:hover:shadow-purple-400/40 border border-white/20' 
+                          : ''
+                      } ${
+                        plan.ctaVariant === 'outline' 
+                          ? 'hover:scale-105' 
+                          : 'hover:scale-105'
+                      }`}
+                      variant={plan.popular ? undefined : plan.ctaVariant}
+                      size="lg"
+                    >
+                      {plan.popular && (
+                        <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -skew-x-12 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000 rounded-md"></div>
+                      )}
+                      <span className="relative z-10 font-semibold">{plan.cta}</span>
+                      {plan.name !== "Enterprise" && (
+                        <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform relative z-10" />
+                      )}
+                    </Button>
+
+                    {/* Additional info for enterprise */}
+                    {plan.name === "Enterprise" && (
+                      <div className="text-center mt-4 text-xs text-muted-foreground">
+                        Custom pricing available for larger teams
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Subtle shine effect on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.02] to-white/[0.05] dark:via-white/[0.05] dark:to-white/[0.08] opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-3xl pointer-events-none"></div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Additional pricing info */}
+          <div className="text-center mt-16 space-y-6">
+            <div className="flex flex-wrap justify-center items-center gap-8 text-sm text-muted-foreground">
+              <div className="flex items-center gap-2 group">
+                <CheckCircle className="w-4 h-4 text-green-500 group-hover:scale-110 transition-transform" />
+                <span>14-day free trial on all paid plans</span>
+              </div>
+              <div className="flex items-center gap-2 group">
+                <Shield className="w-4 h-4 text-blue-500 group-hover:scale-110 transition-transform" />
+                <span>No setup fees</span>
+              </div>
+              <div className="flex items-center gap-2 group">
+                <Clock className="w-4 h-4 text-purple-500 group-hover:scale-110 transition-transform" />
+                <span>Cancel anytime</span>
+              </div>
+            </div>
+            
+            <div className="text-muted-foreground text-sm">
+              Need custom features or enterprise-grade SLAs?{' '}
+              <Button variant="link" className="p-0 h-auto text-sm underline-offset-4 hover:text-foreground transition-colors">
+                Contact our sales team
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Enhanced Integrations Section */}
       <section className="container mx-auto px-6 py-24 relative z-10">
         <div className="max-w-6xl mx-auto text-center">
