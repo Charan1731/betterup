@@ -107,7 +107,7 @@ export default function ValidatorDashboard() {
       <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-gradient-to-br from-purple-500/20 to-purple-600/10 dark:from-purple-400/30 dark:to-purple-500/20 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-40 dark:opacity-60 animate-blob animation-delay-2000"></div>
       <div className="absolute bottom-0 left-1/3 w-96 h-96 bg-gradient-to-br from-pink-500/20 to-pink-600/10 dark:from-pink-400/30 dark:to-pink-500/20 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-40 dark:opacity-60 animate-blob animation-delay-4000"></div>
 
-      <div className="relative z-10">
+      <div className="relative">
         <div className="container mx-auto px-6 py-8 pt-32">
           {/* Enhanced header section */}
           <div className="relative bg-background/70 dark:bg-background/50 backdrop-blur-2xl border border-border/60 dark:border-border/40 rounded-3xl p-8 shadow-2xl ring-1 ring-white/20 dark:ring-white/10 overflow-hidden group hover:shadow-3xl transition-all duration-500 mb-8">
