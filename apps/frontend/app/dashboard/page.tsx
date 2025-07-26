@@ -1,10 +1,11 @@
 "use client";
 import React, { useState, useMemo } from 'react';
-import { ChevronDown, ChevronUp, Globe, Plus, Monitor, Activity, Clock, TrendingUp, AlertCircle, CheckCircle2, Zap, Trash2, X } from 'lucide-react';
+import { ChevronDown, Globe, Plus, Monitor, Activity, Clock, TrendingUp, AlertCircle, CheckCircle2, Zap, Trash2 } from 'lucide-react';
 import { useWebsites } from '@/hooks/useWebsite';
 import axios from 'axios';
 import { useAuth } from '@clerk/nextjs';
 import { Button } from '@/components/ui/button';
+import { LinkPreview } from '@/components/ui/link-preview';
 
 type UptimeStatus = "good" | "bad" | "unknown";
 
@@ -70,7 +71,7 @@ function CreateWebsiteModal({ isOpen, onClose }: { isOpen: boolean; onClose: (ur
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 ">
       <div className="bg-background/95 backdrop-blur-xl border border-border/30 rounded-2xl p-8 w-full max-w-md shadow-2xl ring-1 ring-white/10">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 rounded-2xl pointer-events-none" />
         
@@ -81,7 +82,7 @@ function CreateWebsiteModal({ isOpen, onClose }: { isOpen: boolean; onClose: (ur
             </div>
             <div>
               <h2 className="text-xl font-bold text-foreground">Add Website</h2>
-              <p className="text-sm text-muted-foreground">Monitor a new website's uptime</p>
+              <p className="text-sm text-muted-foreground">Monitor a new website&apos;s uptime</p>
             </div>
           </div>
           
@@ -125,7 +126,7 @@ function ConfirmDeleteModal({ isOpen, onClose, websiteUrl }: { isOpen: boolean; 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 ">
       <div className="bg-background/95 backdrop-blur-xl border border-border/30 rounded-2xl p-8 w-full max-w-md shadow-2xl ring-1 ring-white/10">
         <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 to-orange-500/5 rounded-2xl pointer-events-none" />
         
@@ -229,7 +230,7 @@ function WebsiteCard({ website, onDelete }: { website: ProcessedWebsite; onDelet
       <div className={`relative bg-background/60 backdrop-blur-xl border border-border/30 rounded-2xl overflow-hidden shadow-xl ring-1 ring-white/5 hover:shadow-2xl transition-all duration-300 ${config.border}`}>
         <div className={`absolute inset-0 bg-gradient-to-br ${config.gradient} pointer-events-none rounded-2xl`} />
         
-        <div className="absolute top-4 right-4 z-10">
+        <div className="absolute top-4 right-4">
           <Button
             variant="ghost"
             size="sm"
@@ -254,9 +255,12 @@ function WebsiteCard({ website, onDelete }: { website: ProcessedWebsite; onDelet
               </div>
               
               <div className="space-y-1">
-                <h3 className="font-semibold text-lg text-foreground truncate max-w-xs">
+                {/* <h3 className="font-semibold text-lg text-foreground truncate max-w-xs">
                   {website.url.replace(/^https?:\/\//, '')}
-                </h3>
+                </h3> */}
+                <LinkPreview url={website.url} className="text-lg font-semibold text-foreground truncate max-w-xs">
+                  {website.url.replace(/^https?:\/\//, '')}
+                </LinkPreview>
                 <div className="flex items-center gap-3 text-sm">
                   <span className={`font-medium ${
                     website.status === 'good' ? 'text-green-500' :
@@ -517,7 +521,7 @@ export default function Dashboard() {
             <h1 className="text-4xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent mb-2">
               Dashboard
             </h1>
-            <p className="text-muted-foreground">Monitor your websites' uptime and performance</p>
+            <p className="text-muted-foreground">Monitor your website&aposs uptime and performance</p>
           </div>
           
           <Button
@@ -539,7 +543,7 @@ export default function Dashboard() {
               </div>
               <h3 className="text-xl font-semibold text-foreground mb-2">No websites yet</h3>
               <p className="text-muted-foreground mb-6 max-w-md mx-auto">
-                Start monitoring your websites by adding your first URL. We'll check it every minute and show you real-time status.
+                Start monitoring your websites by adding your first URL. We&apos;ll check it every minute and show you real-time status.
               </p>
               <Button
                 onClick={() => setIsModalOpen(true)}
