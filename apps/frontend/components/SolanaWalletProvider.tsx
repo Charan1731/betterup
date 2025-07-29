@@ -7,8 +7,6 @@ import { WalletModalProvider } from '@solana/wallet-adapter-react-ui';
 import { UnsafeBurnerWalletAdapter } from '@solana/wallet-adapter-wallets';
 import { clusterApiUrl } from '@solana/web3.js';
 import { useMemo } from 'react';
-
-// Default styles that can be overridden by your app
 import '@solana/wallet-adapter-react-ui/styles.css';
 
 export function SolanaWalletProvider({ children }: { children: React.ReactNode }) {
@@ -18,7 +16,7 @@ export function SolanaWalletProvider({ children }: { children: React.ReactNode }
         () => [
             new UnsafeBurnerWalletAdapter(),
         ],
-        [network]
+        []
     );
 
     return (

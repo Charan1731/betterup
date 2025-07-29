@@ -2,7 +2,7 @@
 'use client';
 import React from 'react';
 import Link from 'next/link';
-import { Monitor, BarChart3, Shield, Mail, Twitter, Linkedin, Github } from 'lucide-react';
+import { Monitor, Twitter, Linkedin, Github } from 'lucide-react';
 
 const AppFooter = () => {
   return (
