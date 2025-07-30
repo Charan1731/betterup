@@ -133,3 +133,22 @@ Learn more about the power of Turborepo:
 - [Filtering](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters)
 - [Configuration Options](https://turborepo.com/docs/reference/configuration)
 - [CLI Usage](https://turborepo.com/docs/reference/command-line-reference)
+
+
+## New architecture
+
+ 1. Frontend:
+       * Integrate the useWallet hook from @solana/wallet-adapter-react to get the user's public key.
+       * Add a "Become a Validator" button to the dashboard.
+       * When a user clicks the button, the frontend will send a request to the API with the user's public key.
+
+   2. API:
+       * Create a new endpoint to handle validator registration.
+       * This endpoint will receive the user's public key and associate it with their user ID in the database.
+
+   3. Validator:
+       * Instead of using a hardcoded private key, the validator will need to be able to sign messages on behalf of the user. This
+         can be achieved by having the user sign a message from the frontend and send the signature to the validator.
+
+   4. Hub:
+       * The hub will need to be updated to handle the new validation flow. When a validation task is received, the hub will send it to the appropriate validator based on the user's public key.
