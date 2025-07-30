@@ -17,6 +17,10 @@ app.use(express.json())
 app.use("/api/v1/websites", websiteRouter);
 app.use("/api/v1/validator", validatorRouter);
 
+app.get('/', (req,res) => {
+    res.send("Hello world");
+})
+
 app.listen(8080, () => {
     console.log(`server running on port http://localhost:8080`)
 })
