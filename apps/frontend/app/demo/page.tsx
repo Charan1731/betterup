@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -107,28 +107,48 @@ const Page = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [chartType, setChartType] = useState<'bar' | 'doughnut' | 'line'>('bar');
 
-  async function fetchLatency() {
+  // Simulate realistic latency data for demo purposes
+  const generateRealisticLatency = (site: Site) => {
+    // Base latency ranges by category (in milliseconds)
+    const latencyRanges = {
+      "Search Engine": [150, 400],
+      "Social Media": [200, 600],
+      "E-commerce": [250, 800],
+      "News": [180, 500],
+      "Banking": [300, 900],
+      "Entertainment": [400, 1200],
+      "Utility": [200, 700],
+    };
+
+    const range = latencyRanges[site.category as keyof typeof latencyRanges] || [200, 600];
+    const [min, max] = range;
+    
+    // Add some randomness for realistic variation
+    const baseLatency = Math.random() * (max - min) + min;
+    const variation = (Math.random() - 0.5) * 100; // ±50ms variation
+    
+    return Math.round(Math.max(50, baseLatency + variation));
+  };
+
+  const fetchLatency = useCallback(async () => {
     setLoading(true);
-    const results = await Promise.all(
-      categorizedWebsites.map(async (site) => {
-        const start = performance.now();
-        try {
-          await fetch(site.url, { mode: "no-cors" });
-        } catch (error) {
-          console.error(`Error fetching ${site.url}:`, error);
-        }
-        const latency = performance.now() - start;
-        return { ...site, latency: Math.round(latency) };
-      })
-    );
+    
+    // Simulate network delay for realistic demo experience
+    await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 1500));
+    
+    const results = categorizedWebsites.map((site) => ({
+      ...site,
+      latency: generateRealisticLatency(site)
+    }));
+    
     setWebsitesLatency(results);
     setLoading(false);
-    toast.success("Latency data fetched successfully");
-  }
+    toast.success("Latency data refreshed successfully");
+  }, []);
 
   useEffect(() => {
     fetchLatency();
-  }, []);
+  }, [fetchLatency]);
 
   const filteredWebsites =
     selectedCategory === "All"
@@ -323,10 +343,10 @@ const Page = () => {
             <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-background/90 dark:bg-background/70 backdrop-blur-xl border border-border/60 dark:border-border/40 shadow-lg ring-1 ring-white/20 dark:ring-white/10">
               <div className="flex items-center gap-2">
                 <div className="relative">
-                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                  <div className="absolute inset-0 bg-green-500 rounded-full blur-sm opacity-50 animate-pulse"></div>
+                  <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></div>
+                  <div className="absolute inset-0 bg-orange-500 rounded-full blur-sm opacity-50 animate-pulse"></div>
                 </div>
-                <span className="text-sm font-medium">Real-time Monitoring Demo</span>
+                <span className="text-sm font-medium">Demo Mode - Simulated Data</span>
               </div>
             </div>
             
@@ -340,7 +360,8 @@ const Page = () => {
             </h1>
             
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed font-light">
-              Explore real-time latency data from popular Indian websites with beautiful charts and insights
+              Explore our monitoring platform with simulated latency data from popular Indian websites. 
+              Experience beautiful charts, real-time updates, and comprehensive analytics in action.
             </p>
           </div>
 
@@ -437,8 +458,8 @@ const Page = () => {
                   </p>
                 </div>
                 <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-background/50 border border-border/30">
-                  <Activity className="w-4 h-4 text-green-500" />
-                  <span className="text-sm font-medium">Live Data</span>
+                  <Activity className="w-4 h-4 text-orange-500" />
+                  <span className="text-sm font-medium">Demo Data</span>
                 </div>
               </div>
 
@@ -526,6 +547,21 @@ const Page = () => {
                 );
               })}
             </div>
+          </div>
+
+          {/* Demo Information */}
+          <div className="text-center">
+            <Card className="inline-block p-6 bg-background/40 dark:bg-background/30 backdrop-blur-xl border border-border/40 dark:border-border/30 shadow-lg">
+              <div className="flex items-center gap-3 text-sm text-muted-foreground">
+                <div className="w-4 h-4 rounded-full bg-orange-500/20 flex items-center justify-center">
+                  <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                </div>
+                <span>
+                  This demo uses simulated latency data to showcase our monitoring platform&apos;s capabilities. 
+                  Real monitoring would provide actual network measurements.
+                </span>
+              </div>
+            </Card>
           </div>
         </div>
       </div>
