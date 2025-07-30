@@ -11,6 +11,7 @@ import {
 import { ThemeToggle } from './theme-toggle'
 import { Activity, Monitor, Zap, BarChart3 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { toast } from 'sonner';
 
 const AppNavBar = () => {
   return (
@@ -71,6 +72,7 @@ const AppNavBar = () => {
                 size="sm" 
                 className="relative text-muted-foreground hover:text-foreground backdrop-blur-sm bg-background/30 hover:bg-background/50 border border-border/40 hover:border-border/60 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg group/validator" 
                 asChild
+                onClick={() => toast("Navigating to validator dashboard")}
               >
                 <Link href="/validator">
                   <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-xl opacity-0 group-hover/validator:opacity-100 transition-opacity duration-300"></div>
@@ -119,6 +121,7 @@ const AppNavBar = () => {
                       size="sm" 
                       className="relative text-muted-foreground hover:text-foreground backdrop-blur-sm bg-background/30 hover:bg-background/50 border border-border/40 hover:border-border/60 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg group/dashboard" 
                       asChild
+                      onClick={() => toast("Navigating to dashboard")}
                     >
                       <Link href="/dashboard">
                         <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-xl opacity-0 group-hover/dashboard:opacity-100 transition-opacity duration-300"></div>

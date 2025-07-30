@@ -8,6 +8,7 @@ import AppNavBar from "@/components/AppNavBar";
 import AppFooter from "@/components/AppFooter";
 import { SolanaWalletProvider } from "@/components/SolanaWalletProvider";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -47,6 +48,7 @@ export default function RootLayout({
               <main className="pt-24">
                 {children}
               </main>
+              <Toaster richColors closeButton expand={true}/>
               <AppFooter />
             </SolanaWalletProvider>
           </ThemeProvider>

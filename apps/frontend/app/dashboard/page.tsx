@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useAuth } from '@clerk/nextjs';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 type UptimeStatus = "good" | "bad" | "unknown";
 
@@ -125,9 +126,21 @@ function CreateWebsiteModal({ isOpen, onClose }: { isOpen: boolean; onClose: (ur
 function ConfirmDeleteModal({ isOpen, onClose, websiteUrl }: { isOpen: boolean; onClose: (confirmed: boolean) => void; websiteUrl: string }) {
   if (!isOpen) return null;
 
+  const handleBackdropClick = (e: React.MouseEvent) => {
+    if (e.target === e.currentTarget) {
+      onClose(false);
+    }
+  };
+
   return (
-    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 ">
-      <div className="bg-background/95 backdrop-blur-xl border border-border/30 rounded-2xl p-8 w-full max-w-md shadow-2xl ring-1 ring-white/10">
+    <div 
+      className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50"
+      onClick={handleBackdropClick}
+    >
+      <div 
+        className="bg-background/95 backdrop-blur-xl border border-border/30 rounded-2xl p-8 w-full max-w-md shadow-2xl ring-1 ring-white/10"
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 to-orange-500/5 rounded-2xl pointer-events-none" />
         
         <div className="relative">
@@ -154,12 +167,14 @@ function ConfirmDeleteModal({ isOpen, onClose, websiteUrl }: { isOpen: boolean; 
               variant="ghost"
               onClick={() => onClose(false)}
               className="px-6"
+              type="button"
             >
               Cancel
             </Button>
             <Button
               onClick={() => onClose(true)}
               className="px-6 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white"
+              type="button"
             >
               <Trash2 className="w-4 h-4 mr-2" />
               Delete Website
@@ -210,18 +225,25 @@ function WebsiteCard({ website, onDelete }: { website: ProcessedWebsite; onDelet
   const StatusIcon = config.icon;
 
   const handleDeleteClick = (e: React.MouseEvent) => {
+    e.preventDefault();
     e.stopPropagation();
+    console.log('Delete button clicked for:', website.url); // Debug log
     setShowDeleteConfirm(true);
   };
 
   const handleDeleteConfirm = (confirmed: boolean) => {
+    console.log('Delete confirmation:', confirmed); // Debug log
     setShowDeleteConfirm(false);
     if (confirmed) {
       onDelete(website.id);
     }
   };
 
-  const handleCardClick = () => {
+  const handleCardClick = (e: React.MouseEvent) => {
+    // Don't expand if clicking on the delete button area
+    if ((e.target as HTMLElement).closest('[data-delete-button]')) {
+      return;
+    }
     setIsExpanded(!isExpanded);
   };
 
@@ -230,12 +252,14 @@ function WebsiteCard({ website, onDelete }: { website: ProcessedWebsite; onDelet
       <div className={`relative bg-background/60 backdrop-blur-xl border border-border/30 rounded-2xl overflow-hidden shadow-xl ring-1 ring-white/5 hover:shadow-2xl transition-all duration-300 ${config.border}`}>
         <div className={`absolute inset-0 bg-gradient-to-br ${config.gradient} pointer-events-none rounded-2xl`} />
         
-        <div className="absolute top-4 right-4">
+        {/* Fixed delete button positioning and click handling */}
+        <div className="absolute top-4 right-4 z-10" data-delete-button>
           <Button
             variant="ghost"
             size="sm"
             onClick={handleDeleteClick}
-            className="group h-8 w-8 p-0 rounded-lg bg-background/80 backdrop-blur-sm border border-border/40 hover:border-red-500/40 hover:bg-red-500/10 transition-all duration-200"
+            className="group h-8 w-8 p-0 rounded-lg bg-background/80 backdrop-blur-sm border border-border/40 hover:border-red-500/40 hover:bg-red-500/10 transition-all duration-200 z-10"
+            type="button"
           >
             <Trash2 className="w-4 h-4 text-muted-foreground group-hover:text-red-500 transition-colors" />
           </Button>
@@ -245,7 +269,7 @@ function WebsiteCard({ website, onDelete }: { website: ProcessedWebsite; onDelet
           className="relative p-6 cursor-pointer hover:bg-background/20 transition-all duration-200"
           onClick={handleCardClick}
         >
-          <div className="flex items-center justify-between pr-12"> {/* Add right padding for delete button */}
+          <div className="flex items-center justify-between pr-12">
             <div className="flex items-center gap-4">
               <div className="relative">
                 <StatusCircle status={website.status} size="lg" />
@@ -333,11 +357,14 @@ function WebsiteCard({ website, onDelete }: { website: ProcessedWebsite; onDelet
         )}
       </div>
 
-      <ConfirmDeleteModal 
-        isOpen={showDeleteConfirm}
-        onClose={handleDeleteConfirm}
-        websiteUrl={website.url}
-      />
+      {/* Fixed modal with higher z-index */}
+      {showDeleteConfirm && (
+        <ConfirmDeleteModal 
+          isOpen={showDeleteConfirm}
+          onClose={handleDeleteConfirm}
+          websiteUrl={website.url}
+        />
+      )}
     </>
   );
 }
@@ -493,9 +520,11 @@ export default function Dashboard() {
             },
           }
         );
+        toast.success("Added website successfully")
         await refreshWebsites();
       } catch (error) {
         console.error('Failed to add website:', error);
+        toast.error("Failed to add website")
       }
     }
     setIsModalOpen(false);
@@ -510,8 +539,10 @@ export default function Dashboard() {
         },
       });
       await refreshWebsites();
+      toast.success("Website deleted successfully")
     } catch (error) {
       console.error('Failed to delete website:', error);
+      toast.error("Failed to delete website")
     }
   };
 
