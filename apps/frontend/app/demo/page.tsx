@@ -39,6 +39,7 @@ import {
   Signal,
   Gauge
 } from "lucide-react";
+import Link from "next/link";
 
 ChartJS.register(
   CategoryScale,
@@ -291,9 +292,9 @@ const Page = () => {
 
   const getLatencyStatus = (latency: number) => {
     if (latency < 200) return { status: 'Excellent', color: 'text-green-500', bg: 'bg-green-500/10' };
-    if (latency < 500) return { status: 'Good', color: 'text-blue-500', bg: 'bg-blue-500/10' };
-    if (latency < 1000) return { status: 'Average', color: 'text-yellow-500', bg: 'bg-yellow-500/10' };
-    if (latency < 2000) return { status: 'Slow', color: 'text-orange-500', bg: 'bg-orange-500/10' };
+    if (latency < 500) return { status: 'Good', color: 'text-green-500', bg: 'bg-green-500/10' };
+    if (latency < 1000) return { status: 'Average', color: 'text-gray-500', bg: 'bg-gray-500/10' };
+    if (latency < 2000) return { status: 'Slow', color: 'text-red-500', bg: 'bg-red-500/10' };
     return { status: 'Poor', color: 'text-red-500', bg: 'bg-red-500/10' };
   };
 
@@ -504,11 +505,12 @@ const Page = () => {
               {filteredWebsites.map((site, i) => {
                 const status = getLatencyStatus(site.latency || 0);
                 return (
+                  <Link href={site.url} target="_blank" key={site.url}>
                   <Card
                     key={site.url}
                     className="group p-4 bg-background/60 dark:bg-background/40 backdrop-blur-xl border border-border/40 dark:border-border/30 hover:border-border/60 dark:hover:border-border/50 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer"
                     style={{ animationDelay: `${i * 50}ms` }}
-                  >
+                    >
                     <div className="space-y-3">
                       <div className="flex items-start justify-between">
                         <div className="space-y-1 flex-1 min-w-0">
@@ -540,10 +542,11 @@ const Page = () => {
                             width: `${Math.min((site.latency || 0) / 20, 100)}%`,
                             animationDelay: `${i * 100}ms`
                           }}
-                        ></div>
+                          ></div>
                       </div>
                     </div>
                   </Card>
+                </Link>
                 );
               })}
             </div>

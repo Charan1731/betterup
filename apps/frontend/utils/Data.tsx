@@ -1,5 +1,4 @@
 export const trendingWebsites = [
-  // Global & Regional Essentials
   { name: "Google", url: "https://www.google.com" },
   { name: "YouTube", url: "https://www.youtube.com" },
   { name: "Instagram", url: "https://www.instagram.com" },
