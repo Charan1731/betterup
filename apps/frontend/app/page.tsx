@@ -87,6 +87,9 @@ const Page = () => {
             <Button 
               variant="outline" 
               size="lg" 
+              onClick={() => {
+                router.push('/demo');
+              }}
               className="group border-2 border-border/40 hover:border-border/80 dark:hover:border-border/60 bg-background/90 dark:bg-background/70 backdrop-blur-xl hover:bg-background/95 dark:hover:bg-background/80 text-lg px-10 py-7 rounded-2xl transition-all duration-300 hover:shadow-lg hover:scale-105"
             >
               <Eye className="w-5 h-5 mr-3 group-hover:scale-110 transition-transform" />
