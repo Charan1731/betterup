@@ -8,10 +8,9 @@ import nacl_util from "tweetnacl-util";
 const availableValidators: { validatorId: string, socket: ServerWebSocket<unknown>, publicKey: string }[] = [];
 
 const CALLBACKS : { [callbackId: string]: (data: IncomingMessage) => void } = {}
-const COST_PER_VALIDATION = 100; // in lamports
+const COST_PER_VALIDATION = 100;
 
 async function getLocationFromIP(ip: string): Promise<string> {
-    // Handle localhost/private IPs
     if (ip === '127.0.0.1' || ip === 'localhost' || ip.startsWith('192.168.') || ip.startsWith('10.') || ip.startsWith('172.')) {
         return 'Local';
     }
@@ -35,8 +34,6 @@ async function getLocationFromIP(ip: string): Promise<string> {
         }
 
         const data = await response.json();
-        
-        // Return city, region, country format if available
         if (data.city && data.region && data.country_name) {
             return `${data.city}, ${data.region}, ${data.country_name}`;
         } else if (data.region && data.country_name) {
