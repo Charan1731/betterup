@@ -2,6 +2,7 @@
 import { useAuth } from "@clerk/nextjs";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 const API_BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "";
 
@@ -21,17 +22,23 @@ export function useWebsites() {
     const [websites, setWebsites] = useState<Website[]>([]);
 
     async function refreshWebsites() {    
-        const token = await getToken();
-        
-        const apiUrl = `${API_BACKEND_URL}/api/v1/websites/website`;
-        
-        const response = await axios.get(apiUrl, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        });
-
-        setWebsites(response.data.data || []);
+        try{
+            const token = await getToken();
+            
+            const apiUrl = `${API_BACKEND_URL}/api/v1/websites/website`;
+            
+            const response = await axios.get(apiUrl, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+    
+            setWebsites(response.data.data || []);
+        }catch(error){
+            console.error("Error fetching websites:", error);
+            setWebsites([]);
+            toast.error("Failed to fetch websites")
+        }
     }
 
     useEffect(() => {

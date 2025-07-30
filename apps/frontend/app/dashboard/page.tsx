@@ -165,15 +165,15 @@ function ConfirmDeleteModal({ isOpen, onClose, websiteUrl }: { isOpen: boolean; 
           <div className="flex justify-end gap-3">
             <Button
               variant="ghost"
-              onClick={() => onClose(false)}
-              className="px-6"
+              onClick={() => {onClose(false); toast.error("Deletion cancelled")}}
+              className="px-6 hover:cursor-pointer"
               type="button"
             >
               Cancel
             </Button>
             <Button
               onClick={() => onClose(true)}
-              className="px-6 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white"
+              className="px-6 bg-gradient-to-r hover:cursor-pointer from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white"
               type="button"
             >
               <Trash2 className="w-4 h-4 mr-2" />
@@ -258,7 +258,7 @@ function WebsiteCard({ website, onDelete }: { website: ProcessedWebsite; onDelet
             variant="ghost"
             size="sm"
             onClick={handleDeleteClick}
-            className="group h-8 w-8 p-0 rounded-lg bg-background/80 backdrop-blur-sm border border-border/40 hover:border-red-500/40 hover:bg-red-500/10 transition-all duration-200 z-10"
+            className="group h-8 w-8 p-0 rounded-lg bg-background/80 backdrop-blur-sm border border-border/40 hover:border-red-500/40 hover:bg-red-500/10 hover:cursor-pointer transition-all duration-200 z-10"
             type="button"
           >
             <Trash2 className="w-4 h-4 text-muted-foreground group-hover:text-red-500 transition-colors" />
