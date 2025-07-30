@@ -1,11 +1,11 @@
 "use client";
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { ChevronDown, Globe, Plus, Monitor, Activity, Clock, TrendingUp, AlertCircle, CheckCircle2, Zap, Trash2 } from 'lucide-react';
 import { useWebsites } from '@/hooks/useWebsite';
 import axios from 'axios';
 import { useAuth } from '@clerk/nextjs';
 import { Button } from '@/components/ui/button';
-import { LinkPreview } from '@/components/ui/link-preview';
+import { useRouter } from 'next/navigation';
 
 type UptimeStatus = "good" | "bad" | "unknown";
 
@@ -255,12 +255,10 @@ function WebsiteCard({ website, onDelete }: { website: ProcessedWebsite; onDelet
               </div>
               
               <div className="space-y-1">
-                {/* <h3 className="font-semibold text-lg text-foreground truncate max-w-xs">
+                <h3 className="font-semibold text-lg text-foreground truncate max-w-xs">
                   {website.url.replace(/^https?:\/\//, '')}
-                </h3> */}
-                <LinkPreview url={website.url} className="text-lg font-semibold text-foreground truncate max-w-xs">
-                  {website.url.replace(/^https?:\/\//, '')}
-                </LinkPreview>
+                </h3>
+          
                 <div className="flex items-center gap-3 text-sm">
                   <span className={`font-medium ${
                     website.status === 'good' ? 'text-green-500' :
@@ -412,6 +410,17 @@ export default function Dashboard() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { websites, refreshWebsites } = useWebsites();
   const { getToken } = useAuth();
+  const router = useRouter();
+  const isAuthenticated = async () => {
+    const token = await getToken();
+    if(!token){
+      router.push('/');
+    }
+  }
+
+  useEffect(() =>{
+    isAuthenticated();
+  },[])
 
   const processedWebsites = useMemo(() => {
     return websites.map(website => {
