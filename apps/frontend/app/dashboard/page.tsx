@@ -7,6 +7,7 @@ import { useAuth } from '@clerk/nextjs';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
+import Link from 'next/link';
 
 type UptimeStatus = "good" | "bad" | "unknown";
 
@@ -157,7 +158,9 @@ function ConfirmDeleteModal({ isOpen, onClose, websiteUrl }: { isOpen: boolean; 
           <div className="mb-8">
             <p className="text-foreground mb-2">Are you sure you want to delete monitoring for:</p>
             <div className="p-3 bg-background/50 border border-border rounded-xl">
+            <Link href={websiteUrl} target="_blank">
               <span className="font-medium text-foreground">{websiteUrl.replace(/^https?:\/\//, '')}</span>
+            </Link>
             </div>
             <p className="text-sm text-muted-foreground mt-3">All monitoring data and history for this website will be permanently deleted.</p>
           </div>

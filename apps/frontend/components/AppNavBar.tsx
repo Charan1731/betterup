@@ -15,8 +15,8 @@ import { toast } from 'sonner';
 
 const AppNavBar = () => {
   return (
-    <div className="fixed top-4 left-4 right-4 z-50 w-auto">
-      <nav className="relative bg-background/80 backdrop-blur-2xl border border-border/40 rounded-3xl shadow-2xl shadow-black/20 dark:shadow-black/40 supports-[backdrop-filter]:bg-background/60 overflow-hidden group">
+    <div className="fixed top-6 left-6 right-6 z-50 w-auto">
+      <nav className="relative bg-background/80 backdrop-blur-sm border border-border/40 rounded-3xl shadow-2xl shadow-black/20 dark:shadow-black/40 supports-[backdrop-filter]:bg-background/60 overflow-hidden group">
         {/* Enhanced glass effect overlay with multiple layers */}
         <div className="absolute inset-0 bg-gradient-to-r from-blue-500/8 via-purple-500/4 to-pink-500/8 pointer-events-none rounded-3xl" />
         <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-white/5 pointer-events-none rounded-3xl" />
@@ -95,18 +95,20 @@ const AppNavBar = () => {
                   <Button 
                     variant="ghost" 
                     size="sm" 
-                    className="relative backdrop-blur-sm bg-background/30 hover:bg-background/50 border border-border/40 hover:border-border/60 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg group/signin" 
+                    className="relative backdrop-blur-sm hover:cursor-pointer bg-background/30 hover:bg-background/50 border border-border/40 hover:border-border/60 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg group/signin" 
                     asChild
+                    onClick={() => toast("Attempting sign in")}
                   >
                     <SignInButton mode="modal">
-                      <span className="font-medium relative z-10">Sign In</span>
+                      <span className="font-medium relative z-10 ">Sign In</span>
                     </SignInButton>
                   </Button>
                   
                   <Button 
                     size="sm" 
-                    className="relative bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 hover:from-blue-600 hover:via-purple-600 hover:to-pink-600 text-white shadow-xl hover:shadow-2xl transition-all duration-300 backdrop-blur-sm border border-white/20 rounded-xl px-6 hover:scale-105 group/signup overflow-hidden" 
+                    className="relative bg-gradient-to-r hover:cursor-pointer from-blue-500 via-purple-500 to-pink-500 hover:from-blue-600 hover:via-purple-600 hover:to-pink-600 text-white shadow-xl hover:shadow-2xl transition-all duration-300 backdrop-blur-sm border border-white/20 rounded-xl px-6 hover:scale-105 group/signup overflow-hidden" 
                     asChild
+                    onClick={() => toast("Attempting sign up")}
                   >
                     <SignUpButton mode="modal">
                       <span className="font-semibold relative z-10">Get Started</span>

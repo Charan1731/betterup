@@ -50,3 +50,32 @@ export const getValidatorDetails = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
+
+export const addValidator = async (req: Request, res: Response) => {
+  try {
+
+    const { publicKey,ip,location } = req.body;
+
+    const response = await prismaClient.validator.create({
+      data: {
+        publicKey,
+        location,
+        ip,
+        pendingSol: 0,
+      }
+    })
+
+    if(!response){
+      return res.status(400).json({ message: "Failed to add validator" });
+    }
+
+    res.status(201).json({
+      message: "Validator added successfully",
+      data: response
+    })
+    return;
+    
+  } catch (error) {
+    console.error(error);
+  }
+}
