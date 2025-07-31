@@ -108,9 +108,8 @@ const Page = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [chartType, setChartType] = useState<'bar' | 'doughnut' | 'line'>('bar');
 
-  // Simulate realistic latency data for demo purposes
+
   const generateRealisticLatency = (site: Site) => {
-    // Base latency ranges by category (in milliseconds)
     const latencyRanges = {
       "Search Engine": [150, 400],
       "Social Media": [200, 600],
@@ -304,6 +303,7 @@ const Page = () => {
       value: websitesLatency.length,
       icon: Globe,
       color: "from-blue-500 to-blue-600",
+      darkColor: "dark:from-blue-500 dark:to-blue-600",
       change: "+12%",
     },
     {
@@ -311,6 +311,7 @@ const Page = () => {
       value: `${averageLatency}ms`,
       icon: Timer,
       color: "from-purple-500 to-purple-600",
+      darkColor: "dark:from-purple-500 dark:to-purple-600",
       change: "-5%",
     },
     {
@@ -318,6 +319,7 @@ const Page = () => {
       value: websitesLatency.length > 0 ? `${Math.min(...websitesLatency.map(s => s.latency || 0))}ms` : "0ms",
       icon: Zap,
       color: "from-green-500 to-green-600",
+      darkColor: "dark:from-green-500 dark:to-green-600",
       change: "-8ms",
     },
     {
@@ -325,6 +327,7 @@ const Page = () => {
       value: categories.length - 1,
       icon: BarChart3,
       color: "from-orange-500 to-orange-600",
+      darkColor: "dark:from-orange-500 dark:to-orange-600",
       change: "stable",
     },
   ];
@@ -369,11 +372,11 @@ const Page = () => {
           {/* Stats Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {statsData.map((stat, i) => (
-              <Card key={i} className="group relative p-6 bg-background/60 dark:bg-background/40 backdrop-blur-xl border border-border/40 dark:border-border/30 hover:border-border/60 dark:hover:border-border/50 shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
-                <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br ${stat.color} opacity-5 rounded-lg`}></div>
+              <Card key={i} className="group relative p-6 bg-background/60 dark:bg-background/40 backdrop-blur-xl border border-border/40 dark:border-border/30 shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
+                <div className={`absolute inset-0 opacity-0 transition-opacity duration-500 bg-gradient-to-br ${stat.color}  opacity-5 rounded-lg`}></div>
                 <div className="relative">
                   <div className="flex items-center justify-between mb-4">
-                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${stat.color} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${stat.color} dark:bg-gradient-to-br ${stat.darkColor} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}>
                       <stat.icon className="w-6 h-6 text-white" />
                     </div>
                     <div className="text-xs text-muted-foreground px-2 py-1 rounded-full bg-background/50">

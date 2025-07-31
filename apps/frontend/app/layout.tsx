@@ -48,7 +48,7 @@ export default function RootLayout({
               <main className="pt-24">
                 {children}
               </main>
-              <Toaster richColors closeButton expand={true}/>
+              <Toaster richColors closeButton expand={false}/>
               <AppFooter />
             </SolanaWalletProvider>
           </ThemeProvider>
