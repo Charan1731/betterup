@@ -24,6 +24,7 @@ import {
   Gauge
 } from 'lucide-react';
 import { LAMPORTS_PER_SOL } from "@solana/web3.js";
+import { WalletDisconnectButton } from "@solana/wallet-adapter-react-ui";
 
 const WalletMultiButton = dynamic(
     () => import('@solana/wallet-adapter-react-ui').then(mod => mod.WalletMultiButton),
@@ -157,8 +158,9 @@ export default function ValidatorDashboard() {
                    <RefreshCw className={`w-4 h-4 mr-2 ${isRefreshing ? 'animate-spin' : 'group-hover:rotate-180'} transition-transform duration-300`} />
                    Refresh
                  </Button>
-                <div className="relative">
+                <div className="relative grid grid-cols-2 gap-2">
                   <WalletMultiButton />
+                  <WalletDisconnectButton />
                 </div>
               </div>
             </div>
@@ -387,7 +389,6 @@ export default function ValidatorDashboard() {
                </div>
              )
           ) : (
-            // Enhanced empty state
             <div className="relative bg-background/70 dark:bg-background/50 backdrop-blur-2xl border border-border/60 dark:border-border/40 rounded-3xl p-16 shadow-2xl ring-1 ring-white/20 dark:ring-white/10 overflow-hidden group">
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500/[0.03] via-transparent to-purple-500/[0.03] dark:from-blue-400/[0.08] dark:to-purple-400/[0.08] rounded-3xl"></div>
               <div className="relative text-center space-y-8">
