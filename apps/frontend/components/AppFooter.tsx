@@ -12,7 +12,6 @@ const AppFooter = () => {
       
       <div className="relative container mx-auto px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
-          {/* Brand Section */}
           <div className="flex flex-col gap-4 items-start">
             <Link href="/" className="flex items-center gap-3 hover:scale-105 transition-all duration-300 group/logo">
               <div className="relative">
@@ -30,7 +29,6 @@ const AppFooter = () => {
             </p>
           </div>
 
-          {/* Quick Links */}
           <div>
             <h3 className="font-semibold text-foreground mb-4">Quick Links</h3>
             <ul className="space-y-3">
@@ -41,7 +39,6 @@ const AppFooter = () => {
             </ul>
           </div>
 
-          {/* Resources */}
           <div>
             <h3 className="font-semibold text-foreground mb-4">Resources</h3>
             <ul className="space-y-3">
@@ -52,7 +49,6 @@ const AppFooter = () => {
             </ul>
           </div>
 
-          {/* Legal */}
           <div>
             <h3 className="font-semibold text-foreground mb-4">Legal</h3>
             <ul className="space-y-3">
